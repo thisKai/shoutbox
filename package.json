@@ -1,0 +1,8 @@
+{
+  "name": "shoutbox",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "author": "Kai Patrick",
+  "license": "ISC"
+}
