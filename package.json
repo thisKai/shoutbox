@@ -4,5 +4,9 @@
   "description": "",
   "main": "index.js",
   "author": "Kai Patrick",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "express-ws": "^3.0.0"
+  }
 }
