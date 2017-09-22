@@ -1,7 +1,7 @@
 <template>
     <main id="app" class="root">
         <div class="message-list">
-            <div v-for="message in messages" :key="message" class="message-item"></div>
+            <div v-for="(message, index) in messages" :key="index" class="message-item">{{ message }}</div>
         </div>
         <footer class="message-form">
             <input class="message-input" v-model="newMessage"/>
