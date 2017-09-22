@@ -4,7 +4,7 @@
             <div v-for="(message, index) in messages" :key="index" class="message-item">{{ message }}</div>
         </div>
         <footer class="message-form">
-            <input class="message-input" v-model="newMessage" @keypress.ctrl.enter="sendMessage"/>
+            <textarea class="message-input" v-model="newMessage" @keypress.ctrl.enter="sendMessage"></textarea>
             <button class="send-button" @click="sendMessage">Send</button>
         </footer>
     </main>
