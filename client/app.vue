@@ -4,7 +4,7 @@
             <div v-for="message in messages" :key="message" class="message-item"></div>
         </div>
         <footer class="message-form">
-            <input class="message-input"/>
+            <input class="message-input" v-model="newMessage"/>
             <button class="send-button">Send</button>
         </footer>
     </main>
@@ -15,6 +15,7 @@ export default {
     data() {
         return {
             messages: [],
+            newMessage: '',
         };
     },
 };
