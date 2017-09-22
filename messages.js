@@ -1,8 +1,10 @@
 const {
     REFRESH_MESSAGES,
+    SEND_MESSAGE,
   } = require('./socket-messages');
 
 const messages = [];
+console.log(messages);
 
 function refreshMessages(ws){
     ws.send(JSON.stringify({
@@ -11,6 +13,20 @@ function refreshMessages(ws){
     }));
 }
 
+function processMessage(ws, msg){
+    const message = JSON.parse(msg);
+    console.log('message:', message);
+
+    switch(message.type){
+        case SEND_MESSAGE:
+            messages.push(message.message);
+            break;
+    }
+
+    console.log(messages);
+}
+
 module.exports = {
     refreshMessages,
+    processMessage,
 };
