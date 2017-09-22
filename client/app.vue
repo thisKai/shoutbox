@@ -28,14 +28,26 @@ export default {
                 const uri = `ws://${window.location.hostname}:${window.location.port}`;
                 console.log(uri);
                 const socket = new WebSocket(uri);
-                socket.addEventListener('open', e => console.log(e));
-                socket.addEventListener('message', e => console.log(e));
+                socket.addEventListener('open', e => this.handleSocketOpen(e));
+                socket.addEventListener('message', e => this.handleSocketMessage(e));
 
                 return socket;
             }catch(e){
-                console.error(e, e.message)
+                console.error(e, e.message);
             }
-        }
+        },
+        handleSocketOpen(e){
+            console.log(e);
+        },
+        handleSocketMessage(e){
+            const message = JSON.parse(e.data);
+            console.log(message);
+            switch(message.type){
+                case 'REFRESH_MESSAGES':
+                    this.messages = message.messages;
+                    break;
+            }
+        },
     },
 };
 </script>
