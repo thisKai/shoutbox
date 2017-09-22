@@ -1,7 +1,9 @@
 <template>
     <main id="app" class="root">
         <div class="message-list" v-chat-scroll>
-            <div v-for="(message, index) in messages" :key="index" class="message-item">{{ message }}</div>
+            <div v-for="(message, index) in messages" :key="index" class="message-item">
+                <pre>{{ message }}</pre>
+            </div>
         </div>
         <footer class="message-form">
             <textarea class="message-input" v-model="newMessage" @keypress.ctrl.enter="sendMessage"></textarea>
