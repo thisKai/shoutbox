@@ -12,18 +12,23 @@ function refreshMessages(ws){
         messages,
     }));
 }
+function refreshEveryonesMessages(wss){
+    for(const client of wss.clients){
+        refreshMessages(client);
+    }
+}
 
-function processMessage(ws, msg){
+function processMessage(wss, client, msg){
     const message = JSON.parse(msg);
     console.log('message:', message);
 
     switch(message.type){
         case REFRESH_MESSAGES:
-            refreshMessages(ws);
+            refreshMessages(client);
             break;
         case SEND_MESSAGE:
             messages.push(message.message);
-            refreshMessages(ws);
+            refreshEveryonesMessages(wss, client);
             break;
     }
 

@@ -14,9 +14,11 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'static')));
 app.use(express.static(path.join(__dirname, 'dist')));
 
+const wss = expressWs.getWss();
+
 app.ws('/', ws => {
   ws.on('message', msg => {
-    processMessage(ws, msg);
+    processMessage(wss, ws, msg);
   });
   console.log('Hello WebSocket');
   refreshMessages(ws);
