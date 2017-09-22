@@ -11,6 +11,10 @@
 </template>
 
 <script>
+import {
+    REFRESH_MESSAGES,
+} from '../socket-messages';
+
 export default {
     data() {
         return {
@@ -43,7 +47,7 @@ export default {
             const message = JSON.parse(e.data);
             console.log(message);
             switch(message.type){
-                case 'REFRESH_MESSAGES':
+                case REFRESH_MESSAGES:
                     this.messages = message.messages;
                     break;
             }
