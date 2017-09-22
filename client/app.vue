@@ -58,6 +58,7 @@ export default {
                 type: SEND_MESSAGE,
                 message: this.newMessage,
             }));
+            this.newMessage = '';
         }
     },
 };
