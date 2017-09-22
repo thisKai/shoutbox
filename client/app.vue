@@ -56,6 +56,9 @@ export default {
             }
         },
         sendMessage(){
+            if(this.newMessage.trim() === ''){
+                return;
+            }
             this.socket.send(JSON.stringify({
                 type: SEND_MESSAGE,
                 message: this.newMessage,
