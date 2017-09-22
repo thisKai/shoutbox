@@ -5,7 +5,7 @@
         </div>
         <footer class="message-form">
             <input class="message-input" v-model="newMessage"/>
-            <button class="send-button">Send</button>
+            <button class="send-button" @click="sendMessage">Send</button>
         </footer>
     </main>
 </template>
@@ -13,6 +13,7 @@
 <script>
 import {
     REFRESH_MESSAGES,
+    SEND_MESSAGE,
 } from '../socket-messages';
 
 export default {
@@ -52,6 +53,12 @@ export default {
                     break;
             }
         },
+        sendMessage(){
+            this.socket.send(JSON.stringify({
+                type: SEND_MESSAGE,
+                message: this.newMessage,
+            }));
+        }
     },
 };
 </script>
