@@ -14,9 +14,28 @@
 export default {
     data() {
         return {
+            socket: null,
             messages: [],
             newMessage: '',
         };
+    },
+    mounted() {
+        this.socket = this.createSocket();
+    },
+    methods: {
+        createSocket() {
+            try{
+                const uri = `ws://${window.location.hostname}:${window.location.port}`;
+                console.log(uri);
+                const socket = new WebSocket(uri);
+                socket.addEventListener('open', e => console.log(e));
+                socket.addEventListener('message', e => console.log(e));
+
+                return socket;
+            }catch(e){
+                console.error(e, e.message)
+            }
+        }
     },
 };
 </script>
