@@ -18,6 +18,9 @@ function processMessage(ws, msg){
     console.log('message:', message);
 
     switch(message.type){
+        case REFRESH_MESSAGES:
+            refreshMessages(ws);
+            break;
         case SEND_MESSAGE:
             messages.push(message.message);
             break;
