@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
+const { PORT = 80 } = process.env;
 
 app.use((req, res, next) => {
   console.log('Hello HTTP');
@@ -18,4 +19,5 @@ app.ws('/', ws => {
   console.log('Hello WebSocket');
 });
 
-app.listen(3000);
+console.log('starting server at port', PORT);
+app.listen(PORT);
