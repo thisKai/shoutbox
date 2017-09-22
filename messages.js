@@ -23,6 +23,7 @@ function processMessage(ws, msg){
             break;
         case SEND_MESSAGE:
             messages.push(message.message);
+            refreshMessages(ws);
             break;
     }
 
