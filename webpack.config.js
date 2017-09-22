@@ -6,4 +6,12 @@ module.exports = {
         filename: 'client.js',
         path: path.resolve(__dirname, 'dist'),
     },
+    module: {
+        rules: [
+            {
+              test: /\.vue$/,
+              loader: 'vue-loader',
+            },
+        ],
+    },
 };
