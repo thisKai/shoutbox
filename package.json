@@ -6,7 +6,7 @@
   "author": "Kai Patrick",
   "license": "ISC",
   "scripts": {
-    "dev": "nodemon ."
+    "dev": "nodemon --ignore ./client --ignore ./static --ignore ./dist ."
   },
   "dependencies": {
     "dotenv": "^4.0.0",
