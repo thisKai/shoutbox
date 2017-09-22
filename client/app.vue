@@ -72,6 +72,7 @@ export default {
 }
 .message-list{
     flex-grow: 1;
+    overflow: auto;
 }
 .message-form{
     display: flex;
