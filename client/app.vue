@@ -1,6 +1,6 @@
 <template>
     <main id="app" class="root">
-        <div class="message-list">
+        <div class="message-list" v-chat-scroll>
             <div v-for="(message, index) in messages" :key="index" class="message-item">{{ message }}</div>
         </div>
         <footer class="message-form">
