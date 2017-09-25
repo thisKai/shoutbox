@@ -4,19 +4,20 @@ const {
 } = require('./socket-messages');
 
 const messages = [];
+function getChatMessages(){
+  return Promise.resolve(messages);
+}
 console.log(messages);
 
-function refreshChat(ws) {
+async function refreshChat(ws) {
   ws.send(JSON.stringify({
     type: REFRESH_MESSAGES,
-    messages,
+    messages: await getChatMessages(),
   }));
 }
 
 function refreshAllChats(wss) {
-  for (const client of wss.clients) {
-    refreshChat(client);
-  }
+  return Promise.all([...wss.clients].map(refreshChat));
 }
 
 function logChatMessage(message) {
@@ -36,8 +37,6 @@ function processSocketMessage(wss, client, msg) {
       refreshAllChats(wss, client);
       break;
   }
-
-  console.log(messages);
 }
 
 module.exports = {
