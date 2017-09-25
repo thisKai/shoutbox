@@ -3,8 +3,13 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const expressWs = require('express-ws')(app);
-const { PORT = 80 } = process.env;
-const { refreshMessages, processMessage } = require('./messages');
+const {
+  PORT = 80
+} = process.env;
+const {
+  refreshMessages,
+  processMessage
+} = require('./messages');
 
 app.use((req, res, next) => {
   console.log('Hello HTTP');

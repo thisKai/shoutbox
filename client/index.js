@@ -6,8 +6,8 @@ import App from './app.vue';
 Vue.use(VueChatScroll);
 
 new Vue({
-    el: '#app',
-    render(h){
-        return h(App);
-    },
+  el: '#app',
+  render(h) {
+    return h(App);
+  },
 })
