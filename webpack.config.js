@@ -5,6 +5,7 @@ module.exports = {
   output: {
     filename: 'client.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -14,4 +15,5 @@ module.exports = {
       },
     ],
   },
+  devtool: 'inline-source-map',
 };

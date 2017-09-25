@@ -11,6 +11,12 @@ const {
   processMessage
 } = require('./messages');
 
+const webpackDevMiddleware = require('./webpack-dev-middleware');
+// Tell express to use the webpack-dev-middleware and use the webpack.config.js
+// configuration file as a base.
+app.use(webpackDevMiddleware);
+
+
 app.use((req, res, next) => {
   console.log('Hello HTTP');
   next();
