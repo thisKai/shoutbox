@@ -1,7 +1,11 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './client/index.js',
+  entry: [
+    'webpack-hot-middleware/client',
+    './client/index.js',
+  ],
   output: {
     filename: 'client.js',
     path: path.resolve(__dirname, 'dist'),
@@ -15,5 +19,8 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
   devtool: 'inline-source-map',
 };
