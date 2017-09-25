@@ -17,6 +17,7 @@
   "devDependencies": {
     "css-loader": "^0.28.7",
     "nodemon": "^1.12.1",
+    "sqlite": "^2.8.0",
     "vue-chat-scroll": "^1.2.1",
     "vue-loader": "^13.0.5",
     "vue-template-compiler": "^2.4.4",
