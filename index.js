@@ -7,8 +7,8 @@ const {
   PORT = 80
 } = process.env;
 const {
-  refreshMessages,
-  processMessage
+  refreshChat,
+  processSocketMessage,
 } = require('./messages');
 
 require('./webpack-dev-middleware')(app);
@@ -26,10 +26,10 @@ const wss = expressWs.getWss();
 
 app.ws('/', ws => {
   ws.on('message', msg => {
-    processMessage(wss, ws, msg);
+    processSocketMessage(wss, ws, msg);
   });
   console.log('Hello WebSocket');
-  refreshMessages(ws);
+  refreshChat(ws);
 });
 
 console.log('starting server at port', PORT);

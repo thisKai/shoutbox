@@ -6,30 +6,34 @@ const {
 const messages = [];
 console.log(messages);
 
-function refreshMessages(ws) {
+function refreshChat(ws) {
   ws.send(JSON.stringify({
     type: REFRESH_MESSAGES,
     messages,
   }));
 }
 
-function refreshEveryonesMessages(wss) {
+function refreshAllChats(wss) {
   for (const client of wss.clients) {
-    refreshMessages(client);
+    refreshChat(client);
   }
 }
 
-function processMessage(wss, client, msg) {
-  const message = JSON.parse(msg);
-  console.log('message:', message);
+function logChatMessage(message) {
+  messages.push(message);
+}
 
-  switch (message.type) {
+function processSocketMessage(wss, client, msg) {
+  const socketMessage = JSON.parse(msg);
+  console.log('message:', socketMessage);
+
+  switch (socketMessage.type) {
     case REFRESH_MESSAGES:
-      refreshMessages(client);
+      refreshChat(client);
       break;
     case SEND_MESSAGE:
-      messages.push(message.message);
-      refreshEveryonesMessages(wss, client);
+      logChatMessage(socketMessage);
+      refreshAllChats(wss, client);
       break;
   }
 
@@ -37,6 +41,6 @@ function processMessage(wss, client, msg) {
 }
 
 module.exports = {
-  refreshMessages,
-  processMessage,
+  refreshChat,
+  processSocketMessage,
 };
