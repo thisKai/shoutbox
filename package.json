@@ -6,9 +6,7 @@
   "author": "Kai Patrick",
   "license": "ISC",
   "scripts": {
-    "dev:server": "nodemon --ignore ./client --ignore ./static --ignore ./dist .",
-    "dev:client": "nodemon --watch webpack.config.js ./node_modules/.bin/webpack -- --watch --colors",
-    "dev": "npm run dev:server & npm run dev:client"
+    "dev": "nodemon --ignore ./client --ignore ./static --ignore ./dist ."
   },
   "dependencies": {
     "dotenv": "^4.0.0",
