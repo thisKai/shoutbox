@@ -32,7 +32,7 @@ function processSocketMessage(wss, client, msg) {
       refreshChat(client);
       break;
     case SEND_MESSAGE:
-      logChatMessage(socketMessage);
+      logChatMessage(socketMessage.message);
       refreshAllChats(wss, client);
       break;
   }
