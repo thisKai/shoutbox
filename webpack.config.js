@@ -23,10 +23,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
-      'process.env': mapValues(process.env, (value, key) => {
-        console.log(key);
-        return JSON.stringify(value);
-      }),
+      'process.env': mapValues(process.env, (value, key) => JSON.stringify(value)),
     }),
   ],
   devtool: 'inline-source-map',
