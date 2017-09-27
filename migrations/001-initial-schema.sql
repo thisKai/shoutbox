@@ -1,6 +1,6 @@
 -- Up
 CREATE TABLE ChatMessages (
-  text TEXT
+  message_text TEXT
 )
 
 -- Down
