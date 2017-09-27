@@ -1,6 +1,7 @@
 -- Up
 CREATE TABLE ChatMessages (
-  message_text TEXT
+  id INTEGER PRIMARY KEY,
+  content TEXT
 )
 
 -- Down

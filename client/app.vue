@@ -61,7 +61,7 @@ export default {
       }
       this.socket.send(JSON.stringify({
         type: SEND_MESSAGE,
-        messageText: this.newMessage,
+        content: this.newMessage,
       }));
       this.newMessage = '';
     },

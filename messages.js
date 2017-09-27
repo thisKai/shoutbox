@@ -7,8 +7,7 @@ const database = require('./database');
 async function getChatMessages(){
   const db = await database();
   const rows = await db.all('SELECT * FROM ChatMessages');
-
-  return rows.map(r => r.message_text);
+  return rows.map(r => r.content);
 }
 console.log(getChatMessages());
 
@@ -25,7 +24,7 @@ function refreshAllChats(wss) {
 
 async function logChatMessage(message) {
   const db = await database();
-  db.run('INSERT INTO ChatMessages (message_text) VALUES (?)', message);
+  db.run('INSERT INTO ChatMessages (content) VALUES (?)', message);
 }
 
 function processSocketMessage(wss, client, msg) {
@@ -37,7 +36,7 @@ function processSocketMessage(wss, client, msg) {
       refreshChat(client);
       break;
     case SEND_MESSAGE:
-      logChatMessage(socketMessage.messageText);
+      logChatMessage(socketMessage.content);
       refreshAllChats(wss, client);
       break;
   }
