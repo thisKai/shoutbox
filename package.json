@@ -8,6 +8,7 @@
   "scripts": {
     "start": "node .",
     "dev": "NODE_ENV=development nodemon --ignore ./client --ignore ./static --ignore ./dist .",
+    "dev:reset-db": "NODE_ENV=development SHOUTBOX_RESET_DB=1 nodemon --ignore ./client --ignore ./static --ignore ./dist .",
     "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
