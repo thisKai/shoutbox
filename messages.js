@@ -2,12 +2,15 @@ const {
   REFRESH_MESSAGES,
   SEND_MESSAGE,
 } = require('./socket-messages');
+const database = require('./database');
 
-const messages = [];
-function getChatMessages(){
-  return Promise.resolve(messages);
+async function getChatMessages(){
+  const db = await database();
+  const rows = await db.all('SELECT * FROM ChatMessages');
+
+  return rows.map(r => r.message_text);
 }
-console.log(messages);
+console.log(getChatMessages());
 
 async function refreshChat(ws) {
   ws.send(JSON.stringify({
@@ -20,8 +23,9 @@ function refreshAllChats(wss) {
   return Promise.all([...wss.clients].map(refreshChat));
 }
 
-function logChatMessage(message) {
-  messages.push(message);
+async function logChatMessage(message) {
+  const db = await database();
+  db.run('INSERT INTO ChatMessages (message_text) VALUES (?)', message);
 }
 
 function processSocketMessage(wss, client, msg) {
