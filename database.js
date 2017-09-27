@@ -5,7 +5,9 @@ let database;
 async function open() {
   console.log('opening database');
   const db = await sqlite.open('./.data/db.sqlite');
-  await db.migrate({force: 'last'});
+  if (process.env.NODE_ENV === 'development') {
+    await db.migrate({force: 'last'});
+  }
   return db;
 }
 function get() {
