@@ -6,7 +6,9 @@
   "author": "Kai Patrick",
   "license": "ISC",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon --ignore ./client --ignore ./static --ignore ./dist ."
+    "start": "node .",
+    "dev": "NODE_ENV=development nodemon --ignore ./client --ignore ./static --ignore ./dist .",
+    "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
