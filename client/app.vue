@@ -2,7 +2,7 @@
 <main id="app" class="root">
   <div class="message-list" v-chat-scroll>
     <div v-for="(message, index) in messages" :key="index" class="message-item">
-      <pre>{{ message }}</pre>
+      <pre>{{ message.content }}</pre>
     </div>
   </div>
   <footer class="message-form">
@@ -65,7 +65,7 @@ export default {
       }
       this.socket.send(JSON.stringify({
         type: SEND_MESSAGE,
-        content: this.newMessage,
+        content: this.newMessage.trim(),
       }));
       this.newMessage = '';
     },

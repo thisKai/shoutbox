@@ -8,7 +8,7 @@ const database = require('./database');
 async function getChatMessages(){
   const db = await database();
   const rows = await db.all('SELECT * FROM ChatMessages');
-  return rows.map(r => r.content);
+  return rows;
 }
 console.log(getChatMessages());
 
