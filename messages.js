@@ -19,8 +19,14 @@ async function refreshChat(ws) {
   }));
 }
 
-function refreshAllChats(wss) {
-  return Promise.all([...wss.clients].map(refreshChat));
+async function refreshAllChats(wss) {
+  const chatMessages = await getChatMessages();
+  return Promise.all([...wss.clients].map(client => {
+    client.send(JSON.stringify({
+      type: REFRESH_MESSAGES,
+      messages: chatMessages,
+    }));
+  }));
 }
 
 async function logChatMessage(content) {
