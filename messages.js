@@ -1,6 +1,7 @@
 const {
   REFRESH_MESSAGES,
   SEND_MESSAGE,
+  REPORT_MESSAGE_DELIVERY,
 } = require('./socket-messages');
 const database = require('./database');
 
@@ -33,6 +34,11 @@ async function logChatMessage(content) {
   };
 }
 
+function reportDelivery(ws, message){
+  ws.send(JSON.stringify({
+    type: REPORT_MESSAGE_DELIVERY,
+    message,
+  }));
 }
 
 function processSocketMessage(wss, client, msg) {
@@ -44,7 +50,8 @@ function processSocketMessage(wss, client, msg) {
       refreshChat(client);
       break;
     case SEND_MESSAGE:
-      logChatMessage(socketMessage.content);
+      const chatMessage = logChatMessage(socketMessage.content);
+      reportDelivery(client, chatMessage);
       refreshAllChats(wss, client);
       break;
   }
