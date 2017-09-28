@@ -2,7 +2,7 @@ const {
   REFRESH_MESSAGES,
   SEND_MESSAGE,
   REPORT_MESSAGE_DELIVERY,
-} = require('./socket-messages');
+} = require('../socket-messages');
 const database = require('./database');
 
 async function getChatMessages(){
