@@ -6,7 +6,7 @@
     </div>
   </div>
   <footer class="message-form">
-    <textarea class="message-input" v-model="newMessage" @keypress.ctrl.enter="sendMessage" placeholder="Type your message"></textarea>
+    <chat-input class="message-input" v-model="newMessage" @submit="sendMessage" placeholder="Type your message"></chat-input>
     <button class="send-button" @click="sendMessage">Send</button>
   </footer>
 </main>
@@ -17,8 +17,12 @@ import {
   REFRESH_MESSAGES,
   SEND_MESSAGE,
 } from '../socket-messages';
+import ChatInput from './chat-input.vue';
 
 export default {
+  components: {
+    ChatInput,
+  },
   data() {
     return {
       socket: null,
@@ -100,10 +104,6 @@ export default {
 
 .message-input {
   flex-grow: 1;
-  background: transparent;
-  border: none;
-  padding: 8px 16px;
-  color: #FFF;
 }
 
 .message-input::-webkit-input-placeholder {
