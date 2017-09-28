@@ -7,9 +7,11 @@ const {
   PORT = 80
 } = process.env;
 const {
-  refreshChat,
   processSocketMessage,
 } = require('./messages');
+const {
+  refreshChat,
+} = require('./chat');
 
 require('./webpack-dev-middleware')(app);
 
