@@ -47,7 +47,7 @@ function reportDelivery(ws, message){
   }));
 }
 
-function processSocketMessage(wss, client, msg) {
+async function processSocketMessage(wss, client, msg) {
   const socketMessage = JSON.parse(msg);
   console.log('message:', socketMessage);
 
@@ -56,7 +56,7 @@ function processSocketMessage(wss, client, msg) {
       refreshChat(client);
       break;
     case SEND_MESSAGE:
-      const chatMessage = logChatMessage(socketMessage.content);
+      const chatMessage = await logChatMessage(socketMessage.content);
       reportDelivery(client, chatMessage);
       refreshAllChats(wss, client);
       break;
