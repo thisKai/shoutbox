@@ -1,10 +1,9 @@
 const sqlite = require('sqlite');
-
-let database;
+const { initializeChatRoom } = require('./chat-room');
 
 async function initialData(db) {
   try{
-    await db.run('INSERT INTO ChatRooms DEFAULT VALUES');
+    await initializeChatRoom(db);
   }catch(e){
     console.log('initialData', e)
   }
@@ -19,6 +18,8 @@ async function open() {
   }
   return db;
 }
+
+let database;
 function get() {
   if (!database) {
     database = open();
