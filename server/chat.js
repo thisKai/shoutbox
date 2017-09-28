@@ -30,9 +30,8 @@ async function refreshAllChats(wss) {
 
 async function logChatMessage(content) {
   const db = await database();
-  await db.run('INSERT INTO ChatMessages (content) VALUES (?)', content);
-  const result = await db.get('SELECT last_insert_rowid()');
-  const id = result['last_insert_rowid()'];
+  const result = await db.run('INSERT INTO ChatMessages (content) VALUES (?)', content);
+  const id = result.stmt.lastID
   return {
     id,
     content,
