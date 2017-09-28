@@ -2,7 +2,9 @@
 <main id="app" class="root">
   <div class="message-list" v-chat-scroll>
     <div v-for="(message, index) in messages" :key="index" class="message-item">
-      <pre>{{ message.content }}</pre>
+      <loading-box :loading="messageIsSending(message)">
+        <pre>{{ message.content }}</pre>
+      </loading-box>
     </div>
   </div>
   <footer class="message-form">
@@ -17,10 +19,12 @@ import {
   REFRESH_MESSAGES,
   SEND_MESSAGE,
 } from '../socket-messages';
+import LoadingBox from './loading-box.vue'
 import ChatInput from './chat-input.vue';
 
 export default {
   components: {
+    LoadingBox,
     ChatInput,
   },
   data() {
@@ -67,7 +71,13 @@ export default {
         type: SEND_MESSAGE,
         content: this.newMessage.trim(),
       }));
+      this.messages.push({
+        content: this.newMessage.trim(),
+      });
       this.newMessage = '';
+    },
+    messageIsSending(message){
+      return !message.hasOwnProperty('id');
     },
   },
 };
