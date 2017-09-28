@@ -1,6 +1,8 @@
 <template>
   <div class="wrapper">
-    <slot></slot>
+    <div class="content" :style="contentStyle">
+      <slot></slot>
+    </div>
     <template v-if="loading">
       <div class="circle circle1"></div>
       <div class="circle circle2"></div>
@@ -14,6 +16,20 @@
 export default {
   props: {
     loading: Boolean,
+    opacity: {
+      type: Number,
+      default: 0.5,
+      validator(value) {
+        return value >= 0 && value <= 1;
+      },
+    },
+  },
+  computed: {
+    contentStyle() {
+      return {
+        opacity: this.loading ? this.opacity : 1,
+      };
+    },
   },
 };
 </script>
