@@ -22,9 +22,17 @@ function refreshAllChats(wss) {
   return Promise.all([...wss.clients].map(refreshChat));
 }
 
-async function logChatMessage(message) {
+async function logChatMessage(content) {
   const db = await database();
-  db.run('INSERT INTO ChatMessages (content) VALUES (?)', message);
+  await db.run('INSERT INTO ChatMessages (content) VALUES (?)', content);
+  const result = await db.get('SELECT last_insert_rowid()');
+  const id = result['last_insert_rowid()'];
+  return {
+    id,
+    content,
+  };
+}
+
 }
 
 function processSocketMessage(wss, client, msg) {
