@@ -31,7 +31,7 @@ async function refreshAllChats(wss) {
 
 async function logChatMessage(content) {
   const db = await database();
-  const result = await queries.insertChatMessage(db);
+  const result = await queries.insertChatMessage(db, content);
   const id = result.stmt.lastID
   return {
     id,
