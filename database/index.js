@@ -1,9 +1,11 @@
+const path = require('path');
 const { connect } = require('camo');
 
 let database;
 
 async function init() {
-  database = connect(`nedb://${__dirname}/.data`);
+  const url = path.resolve(__dirname, '..');
+  database = connect(`nedb://${url}/.data`);
 }
 async function get() {
   if(!database) {
