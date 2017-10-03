@@ -2,12 +2,10 @@ const {
   REFRESH_MESSAGES,
   REPORT_MESSAGE_DELIVERY,
 } = require('../socket-messages');
-const database = require('./database');
 const queries = require('./queries/chat');
 
 async function getChatMessages(){
-  const db = await database();
-  const rows = await queries.getChatMessages(db);
+  const rows = await queries.getChatMessages();
   return rows;
 }
 console.log(getChatMessages());
@@ -30,9 +28,8 @@ async function refreshAllChats(wss) {
 }
 
 async function logChatMessage(content) {
-  const db = await database();
-  const result = await queries.insertChatMessage(db, content);
-  const id = result.stmt.lastID
+  const result = await queries.insertChatMessage(content);
+  const id = result._id;
   return {
     id,
     content,
