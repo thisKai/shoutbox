@@ -77,7 +77,7 @@ export default {
       this.newMessage = '';
     },
     messageIsSending(message){
-      return !message.hasOwnProperty('id');
+      return !message.hasOwnProperty('_id');
     },
   },
 };
