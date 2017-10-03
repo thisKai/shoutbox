@@ -1,6 +1,6 @@
 const { Document } = require('camo');
 
-class ChatMessage extends Document {
+module.exports = class ChatMessage extends Document {
   constructor() {
     super();
 
