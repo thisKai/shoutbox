@@ -5,5 +5,6 @@ module.exports = class ChatMessage extends Document {
     super();
 
     this.content = String;
+    this.timestamp = Date;
   }
 }

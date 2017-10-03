@@ -3,11 +3,14 @@ const ChatMessage = require('../../database/chat-message');
 
 async function getChatMessages(){
   await initDatabase();
-  return ChatMessage.find({});
+  return ChatMessage.find({}, { sort: 'timestamp' });
 }
 async function insertChatMessage(content){
   await initDatabase();
-  return ChatMessage.create({ content }).save();
+  return ChatMessage.create({
+    content,
+    timestamp: new Date(),
+  }).save();
 }
 
 module.exports = {
