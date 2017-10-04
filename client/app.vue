@@ -110,6 +110,7 @@ export default {
 .message-form {
   display: flex;
   background-color: #000;
+  flex-shrink: 0;
 }
 
 .message-input {
@@ -140,6 +141,7 @@ export default {
   background: none;
   border: none;
   padding: 8px 16px;
+  color: #FFF;
 }
 
 .send-button:hover {
