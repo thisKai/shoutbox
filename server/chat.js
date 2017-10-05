@@ -28,7 +28,7 @@ async function refreshAllChats(wss) {
 }
 
 async function logChatMessage(content) {
-  const result = await queries.insertChatMessage(content);
+  const result = await queries.insertChatMessage({content});
   const id = result._id;
   return {
     id,

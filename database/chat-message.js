@@ -15,7 +15,7 @@ async function getChatMessages(){
   return ChatMessage.find({}, { sort: 'timestamp' });
 }
 
-async function insertChatMessage(content){
+async function insertChatMessage({content}){
   await initDatabase();
   return ChatMessage.create({
     content,
