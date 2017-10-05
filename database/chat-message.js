@@ -1,6 +1,7 @@
 const { Document } = require('camo');
+const initDatabase = require('.');
 
-module.exports = class ChatMessage extends Document {
+class ChatMessage extends Document {
   constructor() {
     super();
 
@@ -8,3 +9,21 @@ module.exports = class ChatMessage extends Document {
     this.timestamp = Date;
   }
 }
+
+async function getChatMessages(){
+  await initDatabase();
+  return ChatMessage.find({}, { sort: 'timestamp' });
+}
+
+async function insertChatMessage(content){
+  await initDatabase();
+  return ChatMessage.create({
+    content,
+    timestamp: new Date(),
+  }).save();
+}
+
+module.exports = {
+  getChatMessages,
+  insertChatMessage,
+};
