@@ -32,6 +32,7 @@ export default {
         socket.addEventListener('open', e => this.handleSocketOpen(e));
         socket.addEventListener('close', e => this.handleSocketClose(e));
         socket.addEventListener('message', e => this.handleSocketMessage(e));
+        socket.addEventListener('error', e => this.handleSocketError(e));
 
         return socket;
       } catch (e) {
@@ -55,6 +56,9 @@ export default {
           this.messages = message.messages;
           break;
       }
+    },
+    handleSocketError(e) {
+      console.error(e);
     },
     sendMessage(newMessage) {
       const message = newMessage.trim();
