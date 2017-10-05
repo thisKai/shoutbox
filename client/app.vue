@@ -30,15 +30,22 @@ export default {
         console.log(uri);
         const socket = new WebSocket(uri);
         socket.addEventListener('open', e => this.handleSocketOpen(e));
+        socket.addEventListener('close', e => this.handleSocketClose(e));
         socket.addEventListener('message', e => this.handleSocketMessage(e));
 
         return socket;
       } catch (e) {
-        console.error(e, e.message);
+        setTimeout(() => {
+          this.socket = this.createSocket();
+        }, 1000);
       }
     },
     handleSocketOpen(e) {
       console.log(e);
+    },
+    handleSocketClose(e) {
+      console.log(e);
+      this.socket = this.createSocket();
     },
     handleSocketMessage(e) {
       const message = JSON.parse(e.data);
