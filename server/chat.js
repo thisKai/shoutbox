@@ -4,7 +4,7 @@ const {
 } = require('../socket-messages');
 const queries = require('../database/chat-message');
 
-async function getChatMessages(){
+async function getChatMessages() {
   const rows = await queries.getChatMessages();
   return rows;
 }
@@ -28,7 +28,9 @@ async function refreshAllChats(wss) {
 }
 
 async function logChatMessage(content) {
-  const result = await queries.insertChatMessage({content});
+  const result = await queries.insertChatMessage({
+    content
+  });
   const id = result._id;
   return {
     id,
@@ -36,7 +38,7 @@ async function logChatMessage(content) {
   };
 }
 
-function reportDelivery(ws, message){
+function reportDelivery(ws, message) {
   ws.send(JSON.stringify({
     type: REPORT_MESSAGE_DELIVERY,
     message,

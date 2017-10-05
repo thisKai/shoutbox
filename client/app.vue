@@ -1,9 +1,8 @@
 <template>
-<main id="app" class="root">
-  <chat-view class="chat-view" :messages="messages" @send="sendMessage"/>
-</main>
+  <main id="app" class="root">
+    <chat-view class="chat-view" :messages="messages" @send="sendMessage" />
+  </main>
 </template>
-
 <script>
 import {
   REFRESH_MESSAGES,
@@ -66,11 +65,11 @@ export default {
   },
 };
 </script>
-
 <style scoped>
 .root {
   height: 100%;
 }
+
 .chat-view {
   height: 100%;
 }

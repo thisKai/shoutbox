@@ -1,19 +1,18 @@
 <template>
-<div class="wrapper">
-  <div class="message-list" v-chat-scroll>
-    <div v-for="(message, index) in messages" :key="index" class="message-item">
-      <loading-box :loading="messageIsSending(message)">
-        <pre>{{ message.content }}</pre>
-      </loading-box>
+  <div class="wrapper">
+    <div class="message-list" v-chat-scroll>
+      <div v-for="(message, index) in messages" :key="index" class="message-item">
+        <loading-box :loading="messageIsSending(message)">
+          <pre>{{ message.content }}</pre>
+        </loading-box>
+      </div>
     </div>
+    <footer class="message-form">
+      <chat-input class="message-input" v-model="newMessage" @submit="sendMessage" placeholder="Type your message"></chat-input>
+      <button class="send-button" @click="sendMessage">Send</button>
+    </footer>
   </div>
-  <footer class="message-form">
-    <chat-input class="message-input" v-model="newMessage" @submit="sendMessage" placeholder="Type your message"></chat-input>
-    <button class="send-button" @click="sendMessage">Send</button>
-  </footer>
-</div>
 </template>
-
 <script>
 import LoadingBox from './loading-box.vue'
 import ChatInput from './chat-input.vue';
@@ -40,13 +39,12 @@ export default {
       this.$emit('send', message);
       this.newMessage = '';
     },
-    messageIsSending(message){
+    messageIsSending(message) {
       return !message.hasOwnProperty('_id');
     },
   },
 };
 </script>
-
 <style scoped>
 .wrapper {
   display: flex;

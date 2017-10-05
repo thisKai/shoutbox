@@ -20,7 +20,6 @@
     </textarea>
   </div>
 </template>
-
 <script>
 import Vue from 'vue';
 
@@ -40,14 +39,14 @@ export default {
     };
   },
   mounted() {
-    if(this.value.includes('\n')) {
+    if (this.value.includes('\n')) {
       this.makeMultiLine();
     }
   },
   methods: {
     updateValue(event) {
       const { value } = event.target;
-      if(value.includes('\n')) {
+      if (value.includes('\n')) {
         this.makeMultiLine();
       }
       this.$emit('input', value)
@@ -65,7 +64,7 @@ export default {
       });
     },
     async newLine() {
-      if(!this.multi) {
+      if (!this.multi) {
         await this.makeMultiLine();
       }
       const { multiInput: input } = this.$refs;
@@ -76,18 +75,21 @@ export default {
 };
 </script>
 <style>
-.wrapper{
+.wrapper {
   display: flex;
   align-items: stretch;
 }
-input, textarea{
+
+input,
+textarea {
   flex-grow: 1;
   background: transparent;
   border: none;
   padding: 8px 16px;
   color: #FFF;
 }
-textarea{
+
+textarea {
   resize: vertical;
   max-height: 80vh;
 }

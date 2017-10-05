@@ -1,4 +1,6 @@
-const { Document } = require('camo');
+const {
+  Document
+} = require('camo');
 const initDatabase = require('.');
 
 class ChatMessage extends Document {
@@ -12,10 +14,14 @@ class ChatMessage extends Document {
 
 async function getChatMessages(){
   await initDatabase();
-  return ChatMessage.find({}, { sort: 'timestamp' });
+  return ChatMessage.find({}, {
+    sort: 'timestamp'
+  });
 }
 
-async function insertChatMessage({content}){
+async function insertChatMessage({
+  content
+}) {
   await initDatabase();
   return ChatMessage.create({
     content,
