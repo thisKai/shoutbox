@@ -39,33 +39,40 @@ export default {
     };
   },
   mounted() {
-    if (this.value.includes('\n')) {
-      this.makeMultiLine();
-    }
+    this.autoToggleMultiLine();
   },
   methods: {
     updateValue(event) {
       const { value } = event.target;
-      if (value.includes('\n')) {
-        this.makeMultiLine();
-      }
+
+      this.autoToggleMultiLine(value);
+
       this.$emit('input', value)
     },
     submit(event) {
       this.$emit('submit');
+      this.autoToggleMultiLine();
     },
-    makeMultiLine() {
-      this.multi = true;
+    toggleMultiLine(multi) {
+      this.multi = multi;
+
+      const { multiInput, singleInput } = this.$refs;
+
+      const input = multi ? multiInput : singleInput;
+
       return new Promise(resolve => {
         Vue.nextTick(() => {
-          this.$refs.multiInput.focus();
+          input.focus();
           resolve();
         });
       });
     },
+    autoToggleMultiLine(value = this.value) {
+      this.toggleMultiLine(value.includes('\n'));
+    },
     async newLine() {
       if (!this.multi) {
-        await this.makeMultiLine();
+        await this.toggleMultiLine(true);
       }
       const { multiInput: input } = this.$refs;
       input.value = input.value + '\n';
