@@ -18,7 +18,8 @@
     "express-ws": "^3.0.0",
     "lodash": "^4.17.4",
     "nedb": "^1.8.0",
-    "vue": "^2.4.4"
+    "vue": "^2.4.4",
+    "vuex": "^2.4.1"
   },
   "devDependencies": {
     "css-loader": "^0.28.7",
