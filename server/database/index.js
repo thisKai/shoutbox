@@ -6,7 +6,7 @@ const {
 let database;
 
 async function init() {
-  const url = path.resolve(__dirname, '..');
+  const url = path.resolve(__dirname, '..', '..');
   database = connect(`nedb://${url}/.data`);
 }
 async function get() {
