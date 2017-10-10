@@ -30,6 +30,6 @@ export const actions = {
       type: SEND_MESSAGE,
       content: chatMessage,
     };
-    dispatch('connection/send', socketMessage, { root: true });
+    dispatch('socket/send', socketMessage, { root: true });
   },
 };

@@ -11,7 +11,7 @@ export default {
     ChatView,
   },
   mounted() {
-    this.$store.dispatch('connection/connect');
+    this.$store.dispatch('socket/connect');
   },
   computed: {
     messages() {
