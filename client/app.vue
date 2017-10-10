@@ -4,74 +4,23 @@
   </main>
 </template>
 <script>
-import {
-  REFRESH_MESSAGES,
-  SEND_MESSAGE,
-} from '../socket-messages';
 import ChatView from './chat-view.vue';
 
 export default {
   components: {
     ChatView,
   },
-  data() {
-    return {
-      socket: null,
-      messages: [],
-    };
-  },
   mounted() {
-    this.socket = this.createSocket();
+    this.$store.dispatch('connection/connect');
+  },
+  computed: {
+    messages() {
+      return this.$store.state.chat.chatMessages;
+    },
   },
   methods: {
-    createSocket() {
-      try {
-        const uri = `ws://${window.location.hostname}:${window.location.port}`;
-        console.log(uri);
-        const socket = new WebSocket(uri);
-        socket.addEventListener('open', e => this.handleSocketOpen(e));
-        socket.addEventListener('close', e => this.handleSocketClose(e));
-        socket.addEventListener('message', e => this.handleSocketMessage(e));
-        socket.addEventListener('error', e => this.handleSocketError(e));
-
-        return socket;
-      } catch (e) {
-        setTimeout(() => {
-          this.socket = this.createSocket();
-        }, 1000);
-      }
-    },
-    handleSocketOpen(e) {
-      console.log(e);
-    },
-    handleSocketClose(e) {
-      console.log(e);
-      this.socket = this.createSocket();
-    },
-    handleSocketMessage(e) {
-      const message = JSON.parse(e.data);
-      console.log(message);
-      switch (message.type) {
-        case REFRESH_MESSAGES:
-          this.messages = message.messages;
-          break;
-      }
-    },
-    handleSocketError(e) {
-      console.error(e);
-    },
     sendMessage(newMessage) {
-      const message = newMessage.trim();
-      if (message === '') {
-        return;
-      }
-      this.messages.push({
-        content: message,
-      });
-      this.socket.send(JSON.stringify({
-        type: SEND_MESSAGE,
-        content: message,
-      }));
+      this.$store.dispatch('chat/send', newMessage);
     },
   },
 };
